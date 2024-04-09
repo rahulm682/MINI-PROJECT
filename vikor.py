@@ -7,7 +7,8 @@ def getEntropyWeight(choiceMatrix):
 
     # summation dij for each column
     sumForColumn = []
-    for j in range(n):
+    sumForColumn.append(0)
+    for j in range(1, n):
         sum = 0
         for i in range(m):
             sum+=choiceMatrix[i][j]
@@ -17,7 +18,8 @@ def getEntropyWeight(choiceMatrix):
     normalisedMatrix = []
     for i in range(m):
         currRow = []
-        for j in range(n):
+        currRow.append(0)
+        for j in range(1, n):
             currRow.append(choiceMatrix[i][j]/sumForColumn[j])
         
         normalisedMatrix.append(currRow)
@@ -26,7 +28,9 @@ def getEntropyWeight(choiceMatrix):
     # entropy and degree of differentiation(f)
     entropy = []
     f = []
-    for j in range(n):
+    entropy.append(0)
+    f.append(0)
+    for j in range(1, n):
         e = 0
         for i in range(m):
             e -= normalisedMatrix[i][j]*log2(normalisedMatrix[i][j])/log2(m)
@@ -66,8 +70,9 @@ def getRanking(choiceMatrix, criteriaType, weight, v):
     # for that we will be needing first the root of sum of squares of values present in each column (i.e. c(ij) = d(ij)/sqrt(sum of square of each values in column))
     rootValues = []
     normalisedDecisionMatrix = []
-
-    for j in range(n):
+    
+    rootValues.append(0)
+    for j in range(1, n):
         sum = 0
         for i in range(m):
             sum+=choiceMatrix[i][j]*choiceMatrix[i][j]
@@ -75,7 +80,8 @@ def getRanking(choiceMatrix, criteriaType, weight, v):
 
     for i in range(m):
         currRow = []
-        for j in range(n):
+        currRow.append(0)
+        for j in range(1, n):
             currRow.append(choiceMatrix[i][j]/rootValues[j])
         
         normalisedDecisionMatrix.append(currRow)
@@ -90,8 +96,9 @@ def getRanking(choiceMatrix, criteriaType, weight, v):
     # for calculation of utility and regret measures S and R, we will need max and min values from each column and store them
     maxColumn = []
     minColumn = []
-
-    for j in range(n):
+    maxColumn.append(0)
+    minColumn.append(0)
+    for j in range(1, n):
         minV = 1e9+7
         maxV = -1e9+7
         for i in range(m):
@@ -117,7 +124,7 @@ def getRanking(choiceMatrix, criteriaType, weight, v):
     s = []
     for i in range(m):
         sum = 0
-        for j in range(n):
+        for j in range(1, n):
             if maxColumn[j]-minColumn[j]==0:
                 maxV = float('inf')
             elif criteriaType[j]:
@@ -131,7 +138,7 @@ def getRanking(choiceMatrix, criteriaType, weight, v):
     r = []
     for i in range(m):
         maxV = 0
-        for j in range(n):
+        for j in range(1, n):
             if maxColumn[j]-minColumn[j]==0:
                 maxV = float('inf')
             elif criteriaType[j]:
@@ -177,7 +184,7 @@ def getRanking(choiceMatrix, criteriaType, weight, v):
     # storing all values in matrix and sorting the values according to the Q values
     ranking = []
     for i in range(m):
-        curr = [i+1, round(s[i], 3), round(r[i], 3), round(q[i], 3)]
+        curr = [choiceMatrix[i][0], round(s[i], 3), round(r[i], 3), round(q[i], 3)]
         ranking.append(curr)
 
     ranking = sorted(ranking, key=lambda l:l[3])
