@@ -1,3 +1,4 @@
+# practise
 # This clacuation is for calculating the entropy and then using the entropy we are finding the degree of Differentiation and entropy weight for each criteria
 
 from math import log2, sqrt
