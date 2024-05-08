@@ -1,5 +1,6 @@
 from math import pow
 
+# calculation of relative goodness and keeping the pivot element at its place
 def partABAC(decisionMatrix, weights, t, b, criteriaType):
     i = b
     p = t-1
@@ -11,7 +12,7 @@ def partABAC(decisionMatrix, weights, t, b, criteriaType):
         RGki = 1
 
         for j in range(1, n):
-            # cost criteria
+            # cost criteria else beneficial criteria
             if criteriaType[j]:
                 RGik = RGik*pow(((decisionMatrix[k][j]+1)/(decisionMatrix[i][j]+1)), weights[j])
                 RGki = RGki*pow(((decisionMatrix[i][j]+1)/(decisionMatrix[k][j]+1)), weights[j])
@@ -29,7 +30,7 @@ def partABAC(decisionMatrix, weights, t, b, criteriaType):
 
     return p+1
 
-
+# left and right function call (of the pivot element)
 def ABAC(decisionMatrix, weights, t, b, criteriaType):
     if t<b:
         pos = partABAC(decisionMatrix, weights, t, b, criteriaType)

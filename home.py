@@ -1,6 +1,7 @@
 from vikor import getEntropyWeight, getRanking
 from rankreversal import checkForRankReversal
 
+# choiceMatrix and newChoiceMatrix are same, choiceMatrix is used to get the initial ranking and newChoiceMatrix for finfind rank reversals
 choiceMatrix = [
     [1, 14.15, 10.00, 4.00, 3250, 5500, 1300, 15240, 1840, 10211], 
     [2, 23.00, 15.00, 5.00, 17600, 77162, 1305, 18000, 3400, 18288],

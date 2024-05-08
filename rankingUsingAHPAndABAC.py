@@ -19,10 +19,10 @@ decisionMatrix = [
     ]
 
 
-# True: Cost Criteria, False: Beneficial Criteria 
+# True: Cost Criteria, False: Beneficial Criteria (1 - based Indexing)
 criteriaType = [True, False, False, False, False, False, False, False, False, False]
 
-# calculated weight using AHP method
+# calculated weight using AHP method (1 - based Indexing)
 weights = [1, 0.163, 0.098, 0.101, 0.093, 0.11, 0.11, 0.061, 0.195, 0.068]
 
 

@@ -187,6 +187,7 @@ def getRanking(choiceMatrix, criteriaType, weight, v):
         curr = [choiceMatrix[i][0], round(s[i], 3), round(r[i], 3), round(q[i], 3)]
         ranking.append(curr)
 
+    # sorting the ranking list according to the value of q
     ranking = sorted(ranking, key=lambda l:l[3])
 
     # for i in range(m):

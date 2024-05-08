@@ -2,6 +2,8 @@ from math import pow
 from abac import ABAC
 from vikor import getEntropyWeight
 
+# ranking using entropy weight and ABAC
+
 decisionMatrix = [
     [1, 14.15, 10.00, 4.00, 3250, 5500, 1300, 15240, 1840, 10211], 
     [2, 23.00, 15.00, 5.00, 17600, 77162, 1305, 18000, 3400, 18288],

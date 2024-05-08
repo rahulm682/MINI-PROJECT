@@ -1,3 +1,4 @@
+# for testing puspose
 # criteriaMatrix = [[1,5,4,7], [0.2,1,0.5,3], [0.25,2,1,3], [0.14,0.33,0.33,1]]
 
 # criteriaMatrix = [[1,2,2,3,3,0.33,0.33,2,2],
@@ -21,8 +22,10 @@ criteriaMatrix = [[1,2,3,5,7,1/5,8,1/2,1/3],
                   [3,1/3,3,1/8,1/8,7,1/5,1/3,1]]
 
 
-IRMatrix = [0,0,0,0.58,0.90,1.12,1.24,1.32,1.41,1.45,1.49,1.51,1.48]
+# Random Index Matrix
+RIMatrix = [0,0,0,0.58,0.90,1.12,1.24,1.32,1.41,1.45,1.49,1.51,1.48]
 
+# calculating the Normalised Criteria Matrix
 def getNormalisedCriteraMatrix(criteriaMatrix):
     n = len(criteriaMatrix)
     sumColumn = [0]*n
@@ -40,6 +43,7 @@ def getNormalisedCriteraMatrix(criteriaMatrix):
 
     return normalisedCriteriaMatrix
 
+# calculating the synthesis values for each criteria
 def getSynthesisValue(normalisedCriteriaMatrix):
     n = len(normalisedCriteriaMatrix)
     synthesisValue = []
@@ -52,6 +56,7 @@ def getSynthesisValue(normalisedCriteriaMatrix):
 
     return synthesisValue
 
+# calculate the eigen values
 def getEigenValues(criteriaMatrix):
     n = len(criteriaMatrix)
     eigenValues = []
@@ -64,6 +69,7 @@ def getEigenValues(criteriaMatrix):
         eigenValues.append(round(mul**(1.0/n), 3))
     return eigenValues
 
+# calculate the Priority Weight
 def getPriorityWeight(eigenValues):
     n = len(eigenValues)
     priorityWeight = [0]*n
@@ -76,6 +82,7 @@ def getPriorityWeight(eigenValues):
 
     return priorityWeight
 
+# calculate the importance value for each criteria 
 def getImportanceValue(synthesisValue, priorityWeight):
     n = len(priorityWeight)
     importanceValue = []
@@ -86,7 +93,8 @@ def getImportanceValue(synthesisValue, priorityWeight):
     return importanceValue
 
 
-def calculateCR(importanceValue, IRMatrix):
+# calculate Consistency Ratio
+def calculateCR(importanceValue, RIMatrix):
     total = 0
     n = len(importanceValue)
     for x in importanceValue:
@@ -94,10 +102,8 @@ def calculateCR(importanceValue, IRMatrix):
     
     avg = round(total/n, 3)
 
-    mx = max(importanceValue)
-    CI = (avg-n)/(n-1)
-    # print(avg)
-    CR = CI/IRMatrix[n]
+    CI = (avg-n)/n
+    CR = CI/RIMatrix[n]
     return CR
 
 
@@ -119,10 +125,10 @@ print("Priority:  "+str(priorityWeight))
 importanceValue = getImportanceValue(synthesisValue, priorityWeight)
 print("Importance:  "+str(importanceValue))
 
-CR = calculateCR(importanceValue, IRMatrix)
+CR = calculateCR(importanceValue, RIMatrix)
 
 print(CR)
 
 
-# value of CR is < 0.1 and hence we can say that given weights are consistent
+# value of CR = 0.0386 < 0.1 and hence we can say that given weights are consistent
 
